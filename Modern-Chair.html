@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODERN-CHAIR</title>
+    <link rel="stylesheet" href="Modern-Chair.css">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+  <!--THE BELOW LINK IS USED TO INCLUDE A CSS FILE(NORMALIZE.CSS) WHICH IS HOSTED BY CLOUDFLARE C.D.N AND HELPS IN FASTER RENDERING IN DIFFERENT WEB BROWSERS BY KEEPING THE RENDERING PROCESS ALMOST SAME IN EVERY WEB BROWSER  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+    <!-- THE BELOW LINK IS USED TO ADD UNICONS STYLESHEET FOR THE ICONS.USING THIS WE CAN ADD ICON TO OUR ADD TO CART BUTTON -->
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css" />
+</head>
+<body>
+    <div class="wrapper">  <!--wrapper = section-fluid-main-->
+      <div class="container"> <!--Container = Section-->
+     <!-- INFO-WRAPPER DIV FOR ALL THE CONTENT UPTO 'choose color'.It has 2 classes and the class'mob-margin is used for MEDIA QUERIES -->
+     <div class="info-wrapper mob-margin">
+        <p class="title-up">Modern chair</p>
+        <h2>Telford Lounge</h2>
+        <h4>$254 <span>$530</span></h4>
+
+        <!-- ======================================================================
+                      DESCR-DETAILS DIV CONTAINS THE DESCRIPTION AND THE DETAILS
+            =================================================================== -->
+         <div class="desc-details-section">  <!--desc-details-section = section-fluid-->
+        <!-- WE WILL USE INPUT-TYPE RADIO WITH THEIR LABEL FOR DESCRIPTION AND DETAILS.THE 'Description' will be represented by one label of one radio button and the 'Details' will  be represented by another label of another radio button.As we know,on clicking on that specific label,that radio option is selected.We will hide the radio buttons (circle shape) and use the labels only. -->
+        <!-- ======================================================================
+                     IST RADIO INPUT FOLLOWED BY IST LABEL
+            ======================================================================= -->
+        <input class="desc-button" type="radio" name="desc-button" id="desc" checked>  <!--checked means already checked when page loads-->
+        <label for="desc">Description</label> <!--id must be given in 'for'-->
+
+        <!-- ======================================================================
+                     2ND RADIO INPUT FOLLOWED BY 2ND LABEL
+            ======================================================================= -->
+            <input class="desc-button" type="radio" name="desc-button" id="details"> 
+            <label for="details">Details</label>
+
+        <!-- DESCRIPTION PARA DIV WILL HAVE 2 CLASSES,ONE WHICH WILL BE COMMON WITH DETAIL-PARA AND ANOTHER FOR STYLING INDIVIDUAL DATA.BELOW 'DESC-DET-CLASS' WILL BE COMMON AMONG DETAIL-DIMENSION CLASS-->
+                  <div class="desc-det-class desc-para">
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id totam tempora enim officia
+                        veritatis hic.
+                    </p>
+                 </div>
+                 <!--   DETAIL-DIMENSION-CLASS -->
+                 <div class="desc-det-class detail-dimension">
+                    <!-- creating section-inline class for every single dimension which will be displayed as inline-block so that they come in single line -->
+                    <div class="section-inline">
+                        <p><span>80</span>cm<br>Length</p>
+                    </div>
+                    <div class="section-inline">
+                        <p><span>65</span>cm<br>Width</p>
+                    </div>
+                    <div class="section-inline">
+                        <p><span>90</span>cm<br>Height</p>
+                    </div>
+                    <div class="section-inline">
+                        <p><span>17.6</span>lbs<br>Weight</p>
+                    </div>
+                 </div>
+
+         </div> <!--desc-details-section ends-->
+         <h5>Choose Color:</h5>
+ 
+        </div> <!--INFO-WRAPPER ENDS-->
+
+        <!--COLOR-BUTTONS:-For color buttons as well we will use radio input along with their labels and the radio buttons will be kept hidden abd we  will add background color to their labels.These color buttons will have 2 classes and one of the clas will be common among all color buttons for their common styling  -->
+        <!-- ===================================================
+                  IST COLOR BUTTON 
+            ==================================================-->
+            <input class="color-btn for-color-1" type="radio" id="color-1" name="color-btn" checked />
+			<label class="first-color" for="color-1"></label>
+         <!-- ===================================================
+                  2ND COLOR BUTTON 
+            ==================================================-->
+			<input class="color-btn for-color-2" type="radio" id="color-2" name="color-btn" />
+			<label class="color-2" for="color-2"></label>
+             <!-- ===================================================
+                  3RD COLOR BUTTON 
+            ==================================================-->
+			<input class="color-btn for-color-3" type="radio" id="color-3" name="color-btn" />
+			<label class="color-3" for="color-3"></label>
+             <!-- ===================================================
+                  4TH COLOR BUTTON 
+            ==================================================-->
+			<input class="color-btn for-color-4" type="radio" id="color-4" name="color-btn" />
+			<label class="color-4" for="color-4"></label>
+            <!-- ===================================================
+                  5TH COLOR BUTTON 
+            ==================================================-->
+			<input class="color-btn for-color-5" type="radio" id="color-5" name="color-btn" />
+			<label class="color-5" for="color-5"></label>
+         <!-- ===================================================
+                  6TH COLOR BUTTON 
+            ==================================================-->
+			<input class="color-btn for-color-6" type="radio" id="color-6" name="color-btn" />
+			<label class="color-6" for="color-6"></label>
+
+            <!-- ==========================================================
+                       ADD TO CART BUTTON
+                ============================================================ -->
+                <!-- <I> TAG IS USED FOR ICON AND THE CLASS IN THEM ARE DEFAULT CLASSES FROM UNICONS. -->
+                <div class="info-wrapper">
+                    <a href="#" class="btn"><i class="uil uil-shopping-cart icon"></i> Add To Cart</a>
+                </div>
+            <!-- ===================================================================
+                     6 CHAIR IMAGES USING 6 DIV'S 
+                     IMAGES TO BE ADDED USING CSS.
+                =============================================================-->
+            <div class="img-wrap chair-1"></div>
+			<div class="img-wrap chair-2"></div>
+			<div class="img-wrap chair-3"></div>
+			<div class="img-wrap chair-4"></div>
+			<div class="img-wrap chair-5"></div>
+			<div class="img-wrap chair-6"></div>
+            <!-- ==========================================================
+                    6 BACKGROUND COLORS
+                    Since chair-1 will already be displayed when page loads,so we don't have to synchronize the chair with bckground color,thus in ist div there is only background-color.
+                ========================================================= -->
+            <div class="back-color"></div>
+			<div class="back-color chair-2"></div>
+			<div class="back-color chair-3"></div>
+			<div class="back-color chair-4"></div>
+			<div class="back-color chair-5"></div>
+			<div class="back-color chair-6"></div>
+
+        </div>  <!--CONTAINER ENDS-->
+
+</div>  <!--WRAPPER ENDS-->
+</body>
+</html>

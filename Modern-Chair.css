@@ -1,0 +1,565 @@
+/* NOTE THAT IN THIS WEBPAGE WE HAVE USED INPUT YTPE RADIO WITH THEIR LABELS TO SELECT OR UN SELECT A TYPE OF HYPERLINK */
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
+/* USING SOME PROPERTIES ON UNIVERSAL SELECTOR AND PSEUDO-ELEMENT SELECTORS.'*::before' represents any element with beforer pseudo selector*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #fff;
+    background-color: #1f2029;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: none;
+  }
+  /* THE BELOW STYLES ARE NOT NECESSARY BECOX THEY ARE ALREADY IN BODY */
+  /* p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #fff;
+    margin: 0;
+  } */
+  .wrapper{
+  /* position: relative; */
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  }
+  .container{
+    /* setting position to relative so that the child elements like chair-image are set to absolute */
+        position: relative;
+        /* Below we set the max-width as well as width and if the width of the parent-container of class 'container' is less than 900px(900-40=860) then max-width will be implemented and if the width of parent container is > 900px then width will be 860px */
+        max-width: calc(100% - 40px);
+        width: 860px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 100px 0;
+  }
+  .desc-details-section{
+    /* position set to relative so that it's child 'desc-para' and 'detail-dimension' classes can be set to absolute as we want one of them to be hidden at same time */
+    position: relative;
+    width: 100%;
+    display: block;
+  }
+/* Using attribute selector for all the elements having attribute 'type' with value 'radio' in them and which are either checked or not checked.Using this attribute selector we have selected all those elements whose radio inputs are either checked or not checked.*/
+  [type="radio"]:checked,
+ [type="radio"]:not(:checked) {
+    /* saetting the position of radio buttons to absolute so that they can be taken out of the normal flow of html body and their space taken by their respective labels to maintain order in content flow  */
+  position: absolute;
+  /* the radio buttons will be hidden */
+  visibility: hidden;
+}
+/* Using css COMBINATORS(which justify relation b/w different selectors) and specifically among the combinators 'adjacent-sibling-selector (+)' to style the 'labels'.
+'color-btn' is the class used in input type radio of colors.Here the adjacent sibling selector defines the relation b/w 2 class selectors and adjacent sibling selector refers to the element which is 'immediately following'.Note that the 2 classes/elements used in adjacent sibling selector must have same parent.Below we select those 'label' elements which are immediately placed after the '.color-btn' class which can be checked or not-checked */
+.color-btn:checked + label,
+.color-btn:not(:checked) + label {
+  position: relative;
+  height: 40px;
+  /* setting transition for border and transform so that when these labels are vclicked they scale up and a border comes up */
+  transition: transform 200ms linear,border-color 200ms linear;
+  border-radius: 4px;
+  width: 40px;
+  /* By setting overflow hidden,no color will be visible after the border */
+  overflow: hidden;
+  cursor: pointer;
+  color: #ffeba7;
+  margin-right: 10px;
+  box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
+  z-index: 2;
+  background-position: center;
+  background-size: cover;
+  border: 3px solid transparent;
+}
+/* Setting the border-color and scale property to the checked color label.It is possible becoz in radio inputs when we click on the label,color button gets selected,but as we hid the radio buttons,instead we can click on the label. */
+.color-btn:checked + label {
+    border-color: #434343;
+    transform: scale(1.1);
+  }
+  /* APPLYING COLOR TO THE LABELS */
+  /*    IST-COLOR */
+  .first-color {
+    /* APPLYING MARGIN TO IST LABEL ONLY WHICH WILL IN TURN CHANGE THE FLOW OF OTHER COLOR LABELS AS WELL,SO NO NEED TO APPLY ON OTHER COLOR LABELS.ALSO ADDING A BACKGROUND IMAGE AS WELL.  */
+    margin-left: 500px;
+    background-image: url("./images/color1.jpg");
+  }
+  /* COLOR-2 (label-2) */
+  .color-2 {
+    background-image: url("./images/color2.jpg");
+  }
+   /* COLOR-3 (label-3) */
+  label.color-3 {
+    background-image: url("./images/color3.jpg");
+  }
+   /* COLOR-4 (label-4) */
+  label.color-4 {
+    background-image: url("./images/color4.jpg");
+  }
+   /* COLOR-5 (label-5) */
+  label.color-5 {
+    background-image: url("./images/color5.jpg");
+  }
+   /* COLOR-6 (label-6) */
+  label.color-6 {
+    background-image: url("./images/color6.jpg");
+  }
+ /* SETTING PROPERTIES FOR DIV THAT CONTAINS IMG OF CHAIRS */
+ .img-wrap {
+    /* POSITION HAS TO BE ABSOLUTE,OTHERWISE IT COMES WITH NORMAL FLOW OF FLEX */
+    position: absolute;
+    top: 100px;
+    left: 0;
+    /* we can set to to display block as well and inline-block as well too.The only diffrence is that inline block renders the element with normal flow with other inline elements and can let us to set the width and height of the element as in inline elements */
+    display: inline-block;
+    width: 500px;
+    height: 410px;
+    /* z-index specificity from low to high is as:- 
+     1-background color
+     2-chair/color-labels/info-wrapper*/
+     /* Thus for the chair we can set z-inmdex greater than background color whose z-index will be 1. */
+    z-index: 2;
+    transition: animation 550ms linear,opacity 550ms linear;
+    transition-delay: 100ms;
+    background-position: center top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    /* ADDINF THE IST CHAIR WHICH WILL BE DEFAULT WHEN PAGE IS LOADED */
+    background-image: url("./images/chair1.png");
+    opacity: 0;
+  }
+   /*  SETTING THE OPACITY AND ANIMATION TO THE CHAIR-1 WHEN RADIO-INPUT 'for-color-1' IS CHECKED.THIS IS DONE BY USING GENERAL-SIBLING SELECTOR WHICH SELECTS ALL THE TARGET ELEMENTS THAT START AFTER THE SOURCE ELEMNT ENDS.BELOW IT MEANS WHEREVER '.for-color-1:checked'(source element) ENDS THEN AFTER THAT WHEREVER 'img-wrap and chair-1' ELEMENT IS,APPLY FOLLOWING PROPERTIES TO IT*/
+
+   .for-color-1:checked ~ .img-wrap.chair-1 {
+    opacity: 1;
+    /* use google to find beizeier values for shake effect or simply search 'shake effect css'.The term 'both' refers to animation-fill property*/
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  /* APPLYING 2ND CHAIR IMAGE AND SETTING OPACITY AND ANIMATION FOR CHAIR-2 */
+  .img-wrap.chair-2 {
+    background-image: url("./images/chair2.png");
+  }
+  .for-color-2:checked ~ .img-wrap.chair-2 {
+    opacity: 1;
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  /* APPLYING 3RD CHAIR IMAGE AND SETTING OPACITY AND ANIMATION FOR CHAIR-3 */
+  .img-wrap.chair-3 {
+    background-image: url("./images/chair3.png");
+  }
+  .for-color-3:checked ~ .img-wrap.chair-3 {
+    opacity: 1;
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+    /* APPLYING 4TH CHAIR IMAGE AND SETTING OPACITY AND ANIMATION FOR CHAIR-4 */
+  .img-wrap.chair-4 {
+    background-image: url("./images/chair4.png");
+  }
+  .for-color-4:checked ~ .img-wrap.chair-4 {
+    opacity: 1;
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  /* APPLYING 5TH CHAIR IMAGE AND SETTING OPACITY AND ANIMATION FOR CHAIR-5 */
+  .img-wrap.chair-5 {
+    background-image: url("./images/chair5.png");
+  }
+  .for-color-5:checked ~ .img-wrap.chair-5 {
+    opacity: 1;
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  /* APPLYING 6TH CHAIR IMAGE AND SETTING OPACITY AND ANIMATION FOR CHAIR-6 */
+  .img-wrap.chair-6 {
+    background-image: url("./images/chair6.png");
+  }
+  .for-color-6:checked ~ .img-wrap.chair-6 {
+    opacity: 1;
+    animation: shake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  /* KEYFRAMES FOR SHAKE ANIMATION COPIED FROM GOOGLE*/
+  @keyframes shake {
+    10%,
+    90% {
+        /* transform and rotate gives the shake effect */
+      transform: translate3d(-1px, 0, 0) rotate(-1deg);
+    }
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0) rotate(2deg);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-3px, 0, 0) rotate(-3deg);
+    }
+    40%,
+    60% {
+      transform: translate3d(3px, 0, 0) rotate(3deg);
+    }
+  }
+  /* APPLYING BACKGROUND COLOR.THIS BACKGROUND-COLOR WILL BE THE DEFAULT WHEN PAGE LOADS */
+  .back-color {
+    /* fixed position means the background will not scroll when page is scrolled but the content will scroll */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* display:block not necessary to use here */
+    display: block;
+    /* z-index of background color has to be less than z-index of other elements so that they can overlap it */
+    z-index: 1;
+    background-image: linear-gradient(196deg, #f1a9a9, #e66767);
+    /* Applying tytransition to background-image and the opacity of bckgrnd image */
+    transition: background-image 250ms linear,opacity 250ms linear;
+    transition-delay: 300ms;
+  }
+  /* ==========================================================
+               BACKGROUND-COLOR-2
+    ========================================================= */
+  /* APPLYING BACKGROUND COLOR TO CHAIR-2 BUT SETTING IT'S OPACITY TO 0 FOR NOW AND CHANGING IT'S OPACITY WHEN RESPECTIVE COLOR-LABEL IS CHECKED */
+  .back-color.chair-2 {
+    background-image: linear-gradient(196deg, #4c4c4c, #262626);
+    opacity: 0;
+  }
+  /* APPLYING OPACITY WHEN RESPECTIVE COLOR LABEL IS CHECKED BY USING GENERAL SIBLING SELECTOR.BELOW SELECTOR SELECTS ALL ELEMENTS WITH CLASS .back-color and .chair-2 which come after the element with class 'for-color-2' and are checked. */
+  .for-color-2:checked ~ .back-color.chair-2 {
+    opacity: 1;
+  }
+    /* ==========================================================
+            APPLYING BACKGROUND-COLOR-3
+    ========================================================= */
+.back-color.chair-3 {
+  background-image: linear-gradient(196deg, #8a9fb2, #5f7991);
+  opacity: 0;
+}
+/* CHANGING OPACITY OF BG-COLOR-3 */
+.for-color-3:checked ~ .back-color.chair-3 {
+  opacity: 1;
+}
+/* ==========================================================
+            APPLYING BACKGROUND-COLOR-4
+    ========================================================= */
+    .back-color.chair-4 {
+        background-image: linear-gradient(196deg, #97afc3, #6789a7);
+        opacity: 0;
+      }
+    /* CHANGING OPACITY FOR BG-COLOR-4 */
+      .for-color-4:checked ~ .back-color.chair-4 {
+        opacity: 1;
+      }
+/* ==========================================================
+            APPLYING BACKGROUND-COLOR-5
+    ========================================================= */
+    .back-color.chair-5 {
+        background-image: linear-gradient(196deg, #afa6a0, #8c7f76);
+        opacity: 0;
+      }
+       /* CHANGING OPACITY FOR BG-COLOR-5 */
+      .for-color-5:checked ~ .back-color.chair-5 {
+        opacity: 1;
+      }
+/* ==========================================================
+            APPLYING BACKGROUND-COLOR-6
+    ========================================================= */
+    .back-color.chair-6 {
+        background-image: linear-gradient(196deg, #aaadac, #838786);
+        opacity: 0;
+      }
+    /* CHANGING OPACITY FOR BG-COLOR-6 */
+      .for-color-6:checked ~ .back-color.chair-6 {
+        opacity: 1;
+      }
+/*   INFO-WRAPPER:-It contains all the content of the UI on right side upto the heading 'select-color' but excluding button and the label colors*/
+.info-wrapper {
+    /* setting position relative becox it's chid elements are to be positioned absolute */
+    position: relative;
+    margin-left: 500px;
+    /* z-index ha to be greater than the z-index of background color. */
+    z-index: 2;
+    /* display: block; */
+    text-align: left;
+  }
+  /* TITLE-UP */
+  .title-up {
+    /* NO NEED TO MENTION FONT-FAMILY HERE AS IT IS ALREADY MENTIONED IN UNIVERSAL SELECTOR */
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    line-height: 1.2;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  h4 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+  h4 span {
+    text-decoration: line-through;
+    font-size: 20px;
+    opacity: 0.6;
+    padding-left: 15px;
+  }
+  h5 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+/* 'desc-button' IS THE CLASS GIVEN TO THE  INPUT-TYPE RADIO OF DESCRIPTON.HERE WE SELECTED ALL THE LABELS WHICH COME JUST AFTER THE INPUT TYPE RADIO ELEMENT HAVING CLASS 'desc-button' WHICH ARE EITHER CHECKED OR NOT CHECKED.IN SHORT USING AN ADJACENT SIBLING SELECTOR WE SELECTED ALL LABELS OF INPUT CLASS .desc-button WHETHER THEY ARE SELECTED OR NOT */
+.desc-button:checked + label,
+.desc-button:not(:checked) + label {
+  /* position: relative; */
+  /* SETTING UP TRANSITION DURATION FOR OPACITY BECOZ IF IT IS CHECKED,THEN IT'S OPACITY HAS TO BE FULL AND IF IT IS NOT CHECKED THEN IT'S OPACITY HAS TO BE LESS. */
+  transition: opacity 200ms linear;
+  /* display: inline-block; */
+  border: none;
+  cursor: pointer;
+  color: #ffeba7;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  margin-right: 25px;
+  /* setting default opacity of 0.5 and will be changed either on hover(if not-checked) or on selection(if checked) */
+  opacity: 0.5;
+}
+  /*  WHEN desc-button RADIO INPUT ISNOT CHECKED BUT HOVERED,THE OPACITY WILL INCREASE TO 0.8 TO MAKE IT LOOK LIKE A HYPERLINK*/
+  .desc-button:not(:checked) + label:hover {
+    opacity: 0.8;
+  }
+/* IF DESCRIPTION RADIO INPUT TYPE IS CHECKED THEN INCREASE OPACITY OF THE THE IST LABEL AFTER THAT*/
+.desc-button:checked + label {
+    opacity: 1;
+  }
+  /* IF DESCRIPTION RADIO INPUT TYPE IS NOT CHECKED AND IT'S LABEL IS HOVERED,INCREASE OPACITY TO 0.8.THIS IS DONE TO MAKE IT LOOK LIKE A HYPERLINK */
+  .desc-button:not(:checked) + label:hover {
+    opacity: 0.8;
+  }
+/* 'desc-det-class' IS USED FOR THE PARA CONTAINING DETAILS OF THE DESCRIPTION AND THE DETAILS SECTION.IT HAS ANOTHER CLASS AS 'desc-para'FOR DESCRIPTION TEXT AND 'detail-dimension' FOR DETAILS SECTION */
+.desc-det-class{
+    padding-top: 20px;
+    padding-bottom: 30px;
+    /* setting transition for opacity and transform becoz when the section(description or details) is clicked the details of respective sections are visible and display from bottom to top fashion,so translated on y-axis. */
+    transition: opacity 250ms linear,transform 250ms linear;
+    /* SETTING THEIR OPACITY TO ZERO AS OF NOW SO THAT ONLY SELECTED ONE IS SHOWN */
+    opacity: 0;
+    overflow: hidden;
+    /* pointer-events property is used to make sure how elements react tro pointer events like hover etc */
+    pointer-events: none;
+    /* Since text details of both description and detail section translate from bottom to top so TranslateY is used.When any particular section is clicked translateY will be set to zero and  thus text will flow from bottom to top */
+    transform: translateY(20px);
+  }
+  /* ===========STYLING DETAIL-DIMENSION============ */
+  .detail-dimension{
+    /* positioning it using absolute */
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    /* z-index: 2; */
+  }
+  /* IF desc (AN ID OF DESC-BUTTON) RADIO INPUT IS CHECKED THEN USING THE GENERAL SIBLING SELECTOR,APPLY FOLLOWING PROPERTIES TO THE NEXT desc-det-class AND desc-para BOTH OF WHICH REPESENT THE PARA OF DESCRIPTION*/
+  #desc:checked ~ .desc-det-class.desc-para {
+    opacity: 1;
+    pointer-events: auto;
+    /* TRANSLATING IT BACK TO ORIGINAL POSITION ALONG Y-AXIS */
+    transform: translateY(0);
+  }
+   /* IF 'details'(AN ID OF DETAILS SECTION) RADIO INPUT IS CHECKED THEN USING THE GENERAL SIBLING SELECTOR,APPLY FOLLOWING PROPERTIES TO THE NEXT desc-det-class AND detail-dimension BOTH OF WHICH REPESENT THE PARA OF DESCRIPTION*/
+  #details:checked ~ .desc-det-class.detail-dimension {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  /* STYLING section-inline-class WHICH CONTAINS DIMENSIONS OF THE DETAIL SECTION */
+  .section-inline {
+    /* position: relative; */
+    /* BY DISPLAYING INLINE-BLOCK ALL THE P TAGS WILL COME IN SINGLE HORIZONTOL LINE */
+    display: inline-block;
+    margin-right: 20px;
+  }
+  /* STYLING SPAN OF SECTION-INLINE */
+  .section-inline p span {
+    font-size: 30px;
+    line-height: 1.1;
+  }
+  /* Styling BUTTON */
+  .btn {
+    /* setting relative position so that the pseudo elements ::before,::after can be positioned absolute */
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 2;
+    height: 48px;
+    border-radius: 4px;
+    width: 210px;
+    letter-spacing: 1px;
+    /* inline-flex makes the content to have normal flow with other content.It will be a flex but will be with normal flow.We can display it flex only as well. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: 0 6px 15px 0 rgba(16, 39, 112, 0.15);
+    transition: background-color 250ms linear;
+    text-decoration: none;
+    margin-top: 50px;
+    /* z-index: 5; */
+  }
+  /* ICON */
+  .icon {
+    padding-right: 7px;
+    font-size: 20px;
+  }
+  /* CREATING A PSEUDO ELEMENT :BEFORE FOR BUTTON AND THIS PSEUDO ELEMENT WILL BE BE APPLIED BASED ON THE COLOR LABELS */
+  .btn:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    /* Setting z-index lower so that it normally hides behind the main btn.Thus the content of the main button will remain visible */
+    z-index: -1;
+    /* setting the default background-color of ::before.This background-color will be the default color of button based on the default color of chair and the default background color of webpage*/
+    background-color: #944852;
+    transition: background-color 250ms 300ms ease;
+  }
+  /* BUTTON ON HOVER */
+  .btn:hover {
+    box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
+    background-color: #333;
+  }
+  /* NOW SINCE WE WANT THE BACKGROUND-COLOR OF BUTTON TO CHANGE WITH EVERY CHANGE IN COLOR LABELS.WE APPLY BACKGROUND COLOR TO ::BEFORE ONLY BECOX IT IS POSITIONED ABSOLUTE AND Z-INDEX IS SET TO LOWER VALUE WHICH MEANS THE CONTENTS OF BUTTON WILL ALWAYS OVERLAP THE ::BEFORE PSEUDO ELEMENT */
+/* FOR 2ND COLOR LABEL CHANGE BACKGROUND COLOR OF BUTTON :before */
+.for-color-2:checked ~ .info-wrapper .btn:before {
+    background-color: #1a1a1a;
+  }
+  /* FOR 3RD COLOR LABEL CHANGE BACKGROUND COLOR OF BUTTON :before*/
+  .for-color-3:checked ~ .info-wrapper .btn:before {
+    background-color: #40566e;
+  }
+  /* FOR 4TH COLOR LABEL CHANGE BACKGROUND COLOR OF BUTTON :before*/
+  .for-color-4:checked ~ .info-wrapper .btn:before {
+    background-color: #5e89b2;
+  }
+  /* FOR 5TH COLOR LABEL CHANGE BACKGROUND COLOR OF BUTTON :before */
+  .for-color-5:checked ~ .info-wrapper .btn:before {
+    background-color: #8c7f76;
+  }
+  /* FOR 6TH COLOR LABEL CHANGE BACKGROUND COLOR OF BUTTON :before */
+  .for-color-6:checked ~ .info-wrapper .btn:before {
+    background-color: #5d6160;
+  }
+
+  /* APPLYING MEDIA QUERIES FOR SCREEN BASED MEDIA UPTO 991PX.
+  NOTE:@media is a general rule that can be used for various media types, and @media screen specifically targets screens. */
+
+  @media screen and (max-width: 991px) {
+    .container {
+      margin: 0 auto;
+      text-align: center;
+      max-width: calc(100% - 40px);
+      width: 370px;
+    }
+    /* label with class first color */
+     label.first-color {
+        /* previous margin-left was 500px */
+      margin-left: 0;
+    }
+    .info-wrapper {
+        /* previousleft-margin:500px */
+      /* margin-left: 0; */
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 320px;
+      /* NOTE THAT WHEN MARGIN IS SET TO 0 AUTO AND THEN MARGIN-TOP/MARGIN-BOTTOM IS ALSO SET TO AN ELEMENT,THEY BOTH WILL BE APPLIED BUT MARGIN 0 AUTO WILL HAVE LEAST PRECDENCE. */
+    }
+    /* img-wrap contains chair images */
+    .img-wrap {
+      width: 375px;
+      height: 308px;
+      left: 50%;
+      margin-left: -190px;
+      /* when element changes it's properties when screen size decreases,we want it to be slow */
+      transition: all 0.6s linear;
+    }
+    /* styling labels of input type of description and details section whether they are checked or not */
+    .desc-button:checked + label,
+    .desc-button:not(:checked) + label {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+    /* styling labels of color button input types whether they are checked or not */
+    .color-btn:checked + label,
+    .color-btn:not(:checked) + label {
+      height: 40px;
+      width: 40px;
+      margin: 5px auto;
+      text-align: center;
+    }
+    /* section-inline contains dimensions of details section */
+    .section-inline {
+      margin: 0 5px;
+    } 
+  }
+
+  /* MEDIA SCREEN QUERIES FOR DCREEN SIZE UPTO 575PX */
+  @media screen and (max-width: 575px) {
+    .container {
+      width: 280px;
+    }
+    .info-wrapper {
+      width: 280px;
+    }
+    .color-button:checked + label,
+    .color-button:not(:checked) + label {
+      height: 30px;
+      width: 30px;
+    }
+    .section-inline p span {
+      font-size: 24px;
+      line-height: 1.1;
+    }
+    .section-inline p {
+      font-size: 14px;
+    }
+  }
+  
